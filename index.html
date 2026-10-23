@@ -1,105 +1,180 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline Music Player</title>
+    <meta name="theme-color" content="#121922">
+    <meta
+        name="description"
+        content="Zeno is your personal music player. Listen to music from your device."
+    >
+    <title>Zeno — your music, your space</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="app-shell">
+        <aside class="sidebar" aria-label="Zeno">
+            <a class="brand" href="#" aria-label="Zeno home">
+                <span class="brand-mark" aria-hidden="true">z</span>
+                <span>zeno</span>
+            </a>
 
-    <div class="container">
-        <h1>🎵 My Music</h1>
-        <p class="subtitle">Your music, your vibe.</p>
-
-        <label for="musicFiles" class="choose-button">
-            + Choose Music
-        </label>
-
-        <input
-            type="file"
-            id="musicFiles"
-            accept="audio/*"
-            multiple
-            hidden
-        >
-
-        <div class="player">
-            <h3 id="songTitle">No song selected</h3>
-
-            <input
-                type="range"
-                id="progress"
-                value="0"
-                min="0"
-                max="100"
-            >
-
-            <p id="time">0:00 / 0:00</p>
-
-            <div class="controls">
-                <button id="previous" aria-label="Previous song">⏮</button>
-                <button id="playPause" aria-label="Play or pause">▶</button>
-                <button id="next" aria-label="Next song">⏭</button>
+            <div class="sidebar-intro">
+                <span class="eyebrow">YOUR LISTENING ROOM</span>
+                <p>Your music.<br>Right where you left it.</p>
             </div>
 
-            <audio id="audioPlayer"></audio>
-        </div>
+            <div class="sidebar-rule"></div>
 
-        <div class="library">
-            <h2>Your Library</h2>
+            <section class="import-section" aria-labelledby="importHeading">
+                <h2 id="importHeading">Bring your music</h2>
+                <p>Pick audio files from your device to start listening.</p>
+                <input
+                    type="file"
+                    id="musicFiles"
+                    accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac,.opus"
+                    multiple
+                >
+                <label for="musicFiles" class="choose-button">
+                    <span aria-hidden="true">＋</span>
+                    Add music
+                </label>
+                <span class="format-note">Your files stay on your device.</span>
+            </section>
 
-            <input
-                type="search"
-                id="searchSongs"
-                placeholder="Search your songs..."
-            >
+            <div class="sidebar-footer">
+                <span class="status-indicator" aria-hidden="true"></span>
+                <span>Made for listening</span>
+            </div>
+        </aside>
 
-            <button id="showFavorites">⭐ Show Favorites</button>
+        <div class="workspace">
+            <header class="page-header">
+                <div>
+                    <span class="eyebrow">A LITTLE SPACE FOR SOUND</span>
+                    <h1>Settle in<span>.</span></h1>
+                </div>
+                <p class="header-note">The next song is yours to choose.</p>
+            </header>
 
-            <p id="songCount">0 songs</p>
+            <div class="content-grid">
+                <section class="player-panel" aria-labelledby="nowPlayingHeading">
+                    <div class="panel-heading">
+                        <span class="live-dot" aria-hidden="true"></span>
+                        <h2 id="nowPlayingHeading">Now playing</h2>
+                    </div>
 
-            <div id="songList">
-                <p class="empty">Choose music files to get started.</p>
+                    <div class="album-art">
+                        <img id="albumCover" src="default-cover.svg" alt="Album artwork">
+                    </div>
+
+                    <div class="track-details">
+                        <h3 id="songTitle">No song selected</h3>
+                        <p id="status" role="status" aria-live="polite">
+                            Add a few songs and make yourself at home.
+                        </p>
+                    </div>
+
+                    <audio id="audioPlayer" preload="metadata"></audio>
+
+                    <div class="timeline">
+                        <input
+                            type="range"
+                            id="progress"
+                            min="0"
+                            max="100"
+                            value="0"
+                            aria-label="Song progress"
+                        >
+                        <div class="time-row">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+
+                    <div class="controls" aria-label="Playback controls">
+                        <button id="previous" type="button" aria-label="Previous song" title="Previous song">
+                            <span aria-hidden="true">⏮</span>
+                        </button>
+                        <button
+                            id="playPause"
+                            class="play-button"
+                            type="button"
+                            aria-label="Play or pause"
+                            title="Play or pause"
+                        >
+                            <span aria-hidden="true">▶</span>
+                        </button>
+                        <button id="next" type="button" aria-label="Next song" title="Next song">
+                            <span aria-hidden="true">⏭</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="library-panel" aria-labelledby="libraryHeading">
+                    <div class="library-heading">
+                        <div>
+                            <span class="eyebrow">YOUR COLLECTION</span>
+                            <h2 id="libraryHeading">The library</h2>
+                        </div>
+                        <p id="songCount">0 songs</p>
+                    </div>
+
+                    <label class="search-box">
+                        <span aria-hidden="true" class="search-icon">⌕</span>
+                        <input
+                            type="search"
+                            id="searchSongs"
+                            placeholder="Find a song"
+                            aria-label="Search songs"
+                        >
+                        <span class="search-shortcut" aria-hidden="true">⌕</span>
+                    </label>
+
+                    <div class="library-actions">
+                        <button
+                            id="showFavorites"
+                            type="button"
+                            aria-pressed="false"
+                        >
+                            ☆ Favorites
+                        </button>
+                        <label class="playlist-select-label" for="playlistSelect">
+                            <span class="visually-hidden">Choose a playlist</span>
+                            <select id="playlistSelect" aria-label="Choose playlist">
+                                <option value="">All songs</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="playlist-create">
+                        <input
+                            type="text"
+                            id="playlistName"
+                            placeholder="Name a new playlist"
+                            aria-label="New playlist name"
+                        >
+                        <button id="createPlaylist" type="button" aria-label="Create playlist">
+                            Create
+                        </button>
+                    </div>
+
+                    <div class="song-list-heading">
+                        <span>TRACKS</span>
+                        <span>PLAY</span>
+                    </div>
+                    <div id="songList" aria-live="polite">
+                        <div class="empty-state">
+                            <span class="empty-note" aria-hidden="true">♪</span>
+                            <p>No tracks just yet</p>
+                            <span>Add music from your device to fill your library.</span>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-<div class="library">
-    <h2>Your Library</h2>
-
-    <input
-        type="search"
-        id="searchSongs"
-        placeholder="Search your songs..."
-    >
-
-    <button id="showFavorites">⭐ Show Favorites</button>
-
-    <h3>🎶 My Playlists</h3>
-
-    <div class="playlist-controls">
-        <input
-            type="text"
-            id="playlistName"
-            placeholder="Enter playlist name"
-        >
-
-        <button id="createPlaylist">+ Create</button>
-    </div>
-
-    <select id="playlistSelect">
-        <option value="">All Songs</option>
-    </select>
-
-    <p id="songCount">0 songs</p>
-
-    <div id="songList">
-        <p class="empty">Choose music files to get started.</p>
-    </div>
-</div>

@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎵 My Music</h1>
+        <p class="subtitle">Your music, your vibe.</p>
+
+        <label for="musicFiles" class="choose-button">
+            + Choose Music
+        </label>
+
+        <input
+            type="file"
+            id="musicFiles"
+            accept="audio/*"
+            multiple
+            hidden
+        >
+
+        <div class="player">
+            <h3 id="songTitle">No song selected</h3>
+
+            <input
+                type="range"
+                id="progress"
+                value="0"
+                min="0"
+                max="100"
+            >
+
+            <p id="time">0:00 / 0:00</p>
+
+            <div class="controls">
+                <button id="previous" aria-label="Previous song">⏮</button>
+                <button id="playPause" aria-label="Play or pause">▶</button>
+                <button id="next" aria-label="Next song">⏭</button>
+            </div>
+
+            <audio id="audioPlayer"></audio>
+        </div>
+
+        <div class="library">
+            <h2>Your Library</h2>
+
+            <input
+                type="search"
+                id="searchSongs"
+                placeholder="Search your songs..."
+            >
+
+            <button id="showFavorites">⭐ Show Favorites</button>
+
+            <p id="songCount">0 songs</p>
+
+            <div id="songList">
+                <p class="empty">Choose music files to get started.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<div class="library">
+    <h2>Your Library</h2>
+
+    <input
+        type="search"
+        id="searchSongs"
+        placeholder="Search your songs..."
+    >
+
+    <button id="showFavorites">⭐ Show Favorites</button>
+
+    <h3>🎶 My Playlists</h3>
+
+    <div class="playlist-controls">
+        <input
+            type="text"
+            id="playlistName"
+            placeholder="Enter playlist name"
+        >
+
+        <button id="createPlaylist">+ Create</button>
+    </div>
+
+    <select id="playlistSelect">
+        <option value="">All Songs</option>
+    </select>
+
+    <p id="songCount">0 songs</p>
+
+    <div id="songList">
+        <p class="empty">Choose music files to get started.</p>
+    </div>
+</div>
